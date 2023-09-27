@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Каталог фильмов</h2>
+    <ul>
+        {% for kino in kino_list %}
+            <li>
+                <a href="{{ kino.get_absolute_url }}" class="inline-a">{{ kino.title }}</a>
+                <p>({{ kino.genre }})</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,41 @@
+body{
+    font-family: "Segoe UI";
+    background-color: dimgrey;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: black;
+    line-height: 2em;
+}
+
+.menu a{
+    text-decoration: none;
+    color: orange;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+}
+
+.menu a:hover{
+    background-color: orange;
+    color: black;
+}
+
+li{
+    list-style-type: none;
+}
+
+p{
+    display: inline;
+}
+
+.inline-a{
+    color: midnightblue;
+    text-decoration: none;
+}
+
+.inline-a:hover{
+    border-bottom: midnightblue 1px dotted;
+}

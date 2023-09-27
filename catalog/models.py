@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Genre(models.Model):
@@ -70,3 +71,7 @@ class Kino(models.Model):
             res.append(a.lname)
         return ', '.join(res)
     display_actors.short_description = 'Актёры'
+
+
+    def get_absolute_url(self):
+        return reverse('info', args=[self.id])
