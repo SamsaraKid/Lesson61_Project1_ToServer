@@ -17,12 +17,15 @@
         <a href="">Актёры</a>
         <a href="">Режиссёры</a>
         <a href="">Подписка</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'logout' %}">Logout</a>
         <a href="{% url 'admin:index' %}">Админка</a>
     </div>
 
 {% endblock menu %}
 
 {% block content %}
+    <h1>Привет {{ username }}</h1>
     <h2>Каталог фильмов</h2>
     <h3>На сайте {{ k1 }} фильмов</h3>
     <h3>На сайте {{ k2 }} актёров</h3>
