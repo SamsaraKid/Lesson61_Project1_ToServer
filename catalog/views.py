@@ -16,6 +16,7 @@ def index(req):
 from django.views import generic
 class Kinolist(generic.ListView):
     model = Kino
+    paginate_by = 2
 
 # from django.http import HttpResponse
 # def info(req, id):
