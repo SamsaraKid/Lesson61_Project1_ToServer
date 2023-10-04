@@ -26,6 +26,9 @@ class Actor(models.Model):
     def __str__(self):
         return self.lname
 
+    def get_absolute_url(self):
+        return reverse('infoactor', args=[self.id, self.lname])
+
 
 class Status(models.Model):
     choise = (('бесплатно', 'бесплатно'), ('базовая', 'базовая'), ('супер', 'супер'))

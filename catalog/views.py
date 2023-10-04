@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.contrib.auth.models import User
+from django.views import generic
 
 
 def index(req):
@@ -23,7 +24,7 @@ def index(req):
 # def allkino(req):
 #     return render(req, 'index.html')
 
-from django.views import generic
+
 class Kinolist(generic.ListView):
     model = Kino
     paginate_by = 2
@@ -35,3 +36,11 @@ class Kinolist(generic.ListView):
 
 class KinoDetail(generic.DetailView):
     model = Kino
+
+
+class Actorlist(generic.ListView):
+    model = Actor
+
+
+class ActorDetail(generic.DetailView):
+    model = Actor

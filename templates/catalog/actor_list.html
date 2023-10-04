@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Каталог фильмов</h2>
+    <ul>
+        {% for actor in actor_list %}
+            <li>
+                <a href="{{ actor.get_absolute_url }}" class="inline-a">{{ actor.fname }} {{ actor.lname }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
