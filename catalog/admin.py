@@ -26,7 +26,7 @@ class Kinoadmin(admin.ModelAdmin):
     list_filter = ('genre', 'status', 'rating')
     fieldsets = (('О фильме', {'fields': ('title', 'summary', 'actor')}),
                  ('Рейтинг', {'fields': ('rating', 'ager', 'status')}),
-                 ('Остальное', {'fields': ('genre', 'year', 'country', 'director', 'poster')}))
+                 ('Остальное', {'fields': ('genre', 'year', 'country', 'director', 'poster', 'posterstatic')}))
 admin.site.register(Kino, Kinoadmin)
 
 

@@ -1,5 +1,5 @@
 .title{
-    background-color: skyblue;
+    background-color: orange;
     text-align: center;
 }
 
@@ -12,6 +12,10 @@
 .kino_card{
     text-align: center;
     border: 2px solid black;
-    width: 30%;
+    width: 10em;
     padding: 10px;
+}
+
+.kino_card img{
+    width: 100%;
 }

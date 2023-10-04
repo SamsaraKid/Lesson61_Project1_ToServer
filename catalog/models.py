@@ -68,6 +68,7 @@ class Kino(models.Model):
     actor = models.ManyToManyField(Actor, verbose_name='Актёры')
     status = models.ForeignKey(Status, on_delete=models.SET_DEFAULT, default=1, verbose_name='Статус подписки')
     poster = models.ImageField(upload_to='posters/', blank=True, null=True, verbose_name='Постер')
+    posterstatic = models.CharField(max_length=100, blank=True, null=True, verbose_name='Постер в статик')
 
     def __str__(self):
         return self.title

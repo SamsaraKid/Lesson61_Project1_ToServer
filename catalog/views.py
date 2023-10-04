@@ -53,7 +53,23 @@ class Directorlist(generic.ListView):
 class ActorDetail(generic.DetailView):
     model = Actor
 
+
 def status(req):
     k1 = Status.objects.all()
     data = {'podpiska': k1}
     return render(req, 'podpiska.html', data)
+
+
+def prosmotr(req, id1, id2, id3):
+    print(id1, id2, id3)
+    mas = ['бесплатно', 'базовая', 'супер']  # kino id2
+    mas2 = ['Free', 'Based', 'Super']  # user id3
+    podp = User.objects.get(id=id3).groups.all()[0].id
+    print(podp)
+    if id3 == 0:
+        podp = 1
+    if podp >= id2:
+        print('can watch')
+    else:
+        print('can\'t watch')
+    return render(req, 'index.html')
