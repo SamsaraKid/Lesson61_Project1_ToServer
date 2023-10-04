@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Вход</h2>
-    <form action="{% url 'home' %}" method="post">
+    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <table>
             <tr>
@@ -20,6 +20,5 @@
         </table>
         <input type="submit" value="вход">
     </form>
-
 </body>
 </html>

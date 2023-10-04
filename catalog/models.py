@@ -16,6 +16,9 @@ class Director(models.Model):
     def __str__(self):
         return f'{self.fname} {self.lname}'
 
+    def get_absolute_url(self):
+        return reverse('infodirector', args=[self.id, self.lname])
+
 
 class Actor(models.Model):
     fname = models.CharField(max_length=20, verbose_name='Имя')
@@ -64,6 +67,7 @@ class Kino(models.Model):
     ager = models.ForeignKey(AgeRate, on_delete=models.SET_NULL, null=True, verbose_name='Возрастной рейтинг')
     actor = models.ManyToManyField(Actor, verbose_name='Актёры')
     status = models.ForeignKey(Status, on_delete=models.SET_DEFAULT, default=1, verbose_name='Статус подписки')
+    poster = models.ImageField(upload_to='posters/', blank=True, null=True, verbose_name='Постер')
 
     def __str__(self):
         return self.title

@@ -1,12 +1,13 @@
 {% extends 'index.html' %}
 {% block content %}
-    <h2>Имя: {{ kino.title }}</h2>
-    <h3>Фамилия: {{ kino.summary }}</h3>
-    <h3>Дата рождения: {{ kino.director }}</h3>
-    <h3>Страна: {{ kino.ager }}</h3>
-    <h3>Играл в: {{ kino.status }}</h3>
-    <h3>Актёры:</h3>
-    {% for actor in kino.actor.all %}
-        <h4>{{ actor.fname }} {{ actor.lname }}</h4>
-    {% endfor %}
+    <h2>Имя: {{ actor.fname }}</h2>
+    <h3>Фамилия: {{ actor.lname }}</h3>
+    <h3>Дата рождения: {{ actor.born }}</h3>
+    <h3>Страна: {{ actor.country }}</h3>
+    <h3>Играл в:</h3>
+    <ul>
+        {% for kino in actor.kino_set.all %}
+            <li><a href="{{ kino.get_absolute_url }}" class="inline-a">{{ kino }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

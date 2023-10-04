@@ -28,4 +28,7 @@ urlpatterns = [
     path('actor/', views.Actorlist.as_view(), name='allactors'),
     # path('kino/<int:id>/<str:title>', views.info, name='info'),
     path('actor/<slug:pk>/<str:lname>', views.ActorDetail.as_view(), name='infoactor'),
+    path('director/', views.Directorlist.as_view(), name='alldirectors'),
+    path('director/<slug:pk>/<str:lname>', views.DirectorDetail.as_view(), name='infodirector'),
+    path('status/', views.status, name='status')
 ]

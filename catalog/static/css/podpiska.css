@@ -1,0 +1,17 @@
+.title{
+    background-color: skyblue;
+    text-align: center;
+}
+
+.kino_cards{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.kino_card{
+    text-align: center;
+    border: 2px solid black;
+    width: 30%;
+    padding: 10px;
+}

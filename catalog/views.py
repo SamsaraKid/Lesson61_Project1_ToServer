@@ -42,5 +42,18 @@ class Actorlist(generic.ListView):
     model = Actor
 
 
+class DirectorDetail(generic.DetailView):
+    model = Director
+
+
+class Directorlist(generic.ListView):
+    model = Director
+
+
 class ActorDetail(generic.DetailView):
     model = Actor
+
+def status(req):
+    k1 = Status.objects.all()
+    data = {'podpiska': k1}
+    return render(req, 'podpiska.html', data)
