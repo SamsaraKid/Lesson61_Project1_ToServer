@@ -39,3 +39,21 @@ p{
 .inline-a:hover{
     border-bottom: midnightblue 1px dotted;
 }
+
+.center-div{
+    width: max-content;
+    margin: auto;
+}
+
+.center-div img{
+    width: 20em;
+}
+
+.center-div h2, .center-div h3{
+    width: max-content;
+    text-align: center;
+}
+
+.center-div ul{
+    padding-left: 0;
+}

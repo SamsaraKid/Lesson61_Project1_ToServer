@@ -1,11 +1,13 @@
 {% extends 'index.html' %}
 {% block content %}
-    <h2>Имя: {{ director.fname }}</h2>
-    <h3>Фамилия: {{ director.lname }}</h3>
-    <h3>Фильмография:</h3>
-    <ul>
-        {% for kino in director.kino_set.all %}
-            <li><a href="{{ kino.get_absolute_url }}" class="inline-a">{{ kino }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="center-div">
+        <h2>Имя: {{ director.fname }}</h2>
+        <h3>Фамилия: {{ director.lname }}</h3>
+        <h3>Фильмография:</h3>
+        <ul>
+            {% for kino in director.kino_set.all %}
+                <li><a href="{{ kino.get_absolute_url }}" class="inline-a">{{ kino }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock content %}
