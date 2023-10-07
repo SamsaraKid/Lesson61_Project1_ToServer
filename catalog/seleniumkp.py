@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 import time
+time_pause = 0.5
 monthes = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
 # функции для скачивания базы фильмов из кинопоиска
@@ -91,7 +92,7 @@ def getmovies():
 
                     #переход на страницу фильма
                     movie_title.click()
-                    time.sleep(0.5)
+                    time.sleep(time_pause)
                     summary = driver.find_element(By.CLASS_NAME, 'styles_synopsisSection__nJoAj').text
                     ager_all = driver.find_elements(By.CLASS_NAME, 'styles_rootHighContrast__Bevle')
                     if len(ager_all) > 1:
@@ -107,7 +108,7 @@ def getmovies():
                     while True:
                         actor_li = driver.find_elements(By.CLASS_NAME, 'styles_list___ufg4')[0].find_elements(By.TAG_NAME,'li')
                         actor_li[i].find_element(By.TAG_NAME, 'a').click()
-                        time.sleep(0.5)
+                        time.sleep(time_pause)
                         name = driver.find_element(By.CLASS_NAME, 'styles_primaryName__2Zu1T').text
                         try:
                             actor_fname = name[0:name.index(' ')]
@@ -138,7 +139,7 @@ def getmovies():
                         print('Актёр: ', actor)
                         actors.append(actor)
                         driver.back()
-                        time.sleep(0.5)
+                        time.sleep(time_pause)
                         i += 1
                         if i >= len(actor_li):
                             break
