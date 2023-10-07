@@ -2,12 +2,13 @@ from django.shortcuts import render
 from .models import *
 from django.contrib.auth.models import User
 from django.views import generic
-
+import datetime
+from .seleniumkp import getmovies
 
 def index(req):
     numkino = Kino.objects.all().count()
     numactor = Actor.objects.all().count()
-    numfree = Kino.objects.filter(status__kino=1).count()
+    numfree = Kino.objects.filter(status_id=1).count()
     # username = req.user.first_name if hasattr(req.user, 'first_name') else 'Guest'
     try:
         username = req.user.first_name
@@ -18,6 +19,13 @@ def index(req):
     # user.first_name = 'Vlad'
     # user.last_name = 'Petrov'
     # user.save()
+    # try:
+    #     a = Actor.objects.get(fname='Гоша', lname='Куценко').id
+    #     print(a)
+    # except:
+    #     print(False)
+    # getmovies()
+
     return render(req, 'index.html', context=data)
 
 
@@ -27,7 +35,7 @@ def index(req):
 
 class Kinolist(generic.ListView):
     model = Kino
-    paginate_by = 2
+    paginate_by = 50
 
 # from django.http import HttpResponse
 # def info(req, id):
@@ -40,18 +48,20 @@ class KinoDetail(generic.DetailView):
 
 class Actorlist(generic.ListView):
     model = Actor
-
-
-class DirectorDetail(generic.DetailView):
-    model = Director
-
-
-class Directorlist(generic.ListView):
-    model = Director
+    paginate_by = 50
 
 
 class ActorDetail(generic.DetailView):
     model = Actor
+
+
+class Directorlist(generic.ListView):
+    model = Director
+    paginate_by = 50
+
+
+class DirectorDetail(generic.DetailView):
+    model = Director
 
 
 def status(req):

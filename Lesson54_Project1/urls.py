@@ -17,8 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from catalog import views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,11 +27,9 @@ urlpatterns = [
     path('user/', include('django.contrib.auth.urls')),
     path('actor/', views.Actorlist.as_view(), name='allactors'),
     # path('kino/<int:id>/<str:title>', views.info, name='info'),
-    path('actor/<slug:pk>/<str:lname>', views.ActorDetail.as_view(), name='infoactor'),
+    path('actor/<slug:pk>/<str:name>', views.ActorDetail.as_view(), name='infoactor'),
     path('director/', views.Directorlist.as_view(), name='alldirectors'),
     path('director/<slug:pk>/<str:lname>', views.DirectorDetail.as_view(), name='infodirector'),
     path('status/', views.status, name='status'),
     path('status/prosmotr/<int:id1><int:id2><int:id3>/', views.prosmotr, name='prosmotr'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

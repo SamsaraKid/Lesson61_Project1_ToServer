@@ -5,7 +5,7 @@
 {% block content %}
     <div class="center-div">
         <h2>{{ kino.title }}</h2>
-        <img src="{% static kino.posterstatic %}">
+        <img src="{{ kino.poster }}">
         <h3>Год: {{ kino.year }}</h3>
         <h3>Жанр: {{ kino.genre }}</h3>
         <h3>Описание: {{ kino.summary }}</h3>

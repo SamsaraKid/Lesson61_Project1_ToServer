@@ -27,10 +27,10 @@ class Actor(models.Model):
     country = models.CharField(max_length=20, blank=True, null=True, verbose_name='Страна')
 
     def __str__(self):
-        return self.lname
+        return f'{self.fname} {self.lname}'
 
     def get_absolute_url(self):
-        return reverse('infoactor', args=[self.id, self.lname])
+        return reverse('infoactor', args=[self.id, f'{self.fname} {self.lname}'])
 
 
 class Status(models.Model):
@@ -60,15 +60,14 @@ class Kino(models.Model):
     title = models.CharField(max_length=20, verbose_name='Название')
     genre = models.ForeignKey(Genre, on_delete=models.SET_DEFAULT, default=1, verbose_name='Жанр')
     rating = models.FloatField(verbose_name='Рейтинг')
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, verbose_name='Страна')
-    director = models.ForeignKey(Director, on_delete=models.SET_NULL, null=True, verbose_name='Режиссёр')
-    summary = models.TextField(max_length=500, verbose_name='Краткое описание')
+    country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Страна')
+    director = models.ForeignKey(Director, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Режиссёр')
+    summary = models.TextField(max_length=5000, verbose_name='Краткое описание')
     year = models.IntegerField(verbose_name='Год')
-    ager = models.ForeignKey(AgeRate, on_delete=models.SET_NULL, null=True, verbose_name='Возрастной рейтинг')
-    actor = models.ManyToManyField(Actor, verbose_name='Актёры')
+    ager = models.ForeignKey(AgeRate, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Возрастной рейтинг')
+    actor = models.ManyToManyField(Actor, verbose_name='Актёры', blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.SET_DEFAULT, default=1, verbose_name='Статус подписки')
-    poster = models.ImageField(upload_to='posters/', blank=True, null=True, verbose_name='Постер')
-    posterstatic = models.CharField(max_length=100, blank=True, null=True, verbose_name='Постер в статик')
+    poster = models.CharField(max_length=5000, blank=True, null=True, verbose_name='Ссылка на постер')
 
     def __str__(self):
         return self.title

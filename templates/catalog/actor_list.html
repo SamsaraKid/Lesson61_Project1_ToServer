@@ -9,6 +9,40 @@
                 </li>
             {% endfor %}
         </ul>
+
+    {% if is_paginated %}
+            {#    <div>#}
+            {##}
+            {#        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            {#            <a href="?page={{page_obj.previous_page_number}}">Пред</a> {# link to the prev page #}
+            {#        {% endif %}#}
+            {#        <span>страница {{page_obj.number}} из {{ page_obj.paginator.num_pages }}</span> {# the current page number #}
+            {##}
+            {#        {%if page_obj.has_next %} {# whether the next page exists #}
+            {#            <a href="?page={{page_obj.next_page_number}}">След</a> {# link to the next page #}
+            {#        {% endif %}#}
+            {##}
+            {#    </div>#}
+            <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+            </div>
+        {% endif %}
+
+
     </div>
 
 {% endblock content %}

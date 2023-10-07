@@ -127,8 +127,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# Основной url для управления медиафайлами
-MEDIA_URL = 'media/'
-
-# Путь хранения картинок
-MEDIA_ROOT = os.path.join(BASE_DIR, 'catalog/media/')
