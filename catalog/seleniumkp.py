@@ -20,40 +20,39 @@ def driverprepare():
 
 
 def addtodb(data):
-    if not Kino.objects.filter(title=data['title'], year=data['year']):
+    try:
+        country = Country.objects.get(name=data['country'])
+    except:
+        country = Country.objects.create(name=data['country'])
+    try:
+        director = Director.objects.get(**data['director'])
+    except:
+        director = Director.objects.create(**data['director'])
+    try:
+        ager = AgeRate.objects.get(rate=data['ager'])
+    except:
+        ager = AgeRate.objects.create(rate=data['ager'])
+    try:
+        genre = Genre.objects.get(name=data['genre'])
+    except:
+        genre = Genre.objects.create(name=data['genre'])
+    kino = Kino.objects.create(title=data['title'],
+                            genre=genre,
+                            rating=data['rating'],
+                            country=country,
+                            director=director,
+                            summary=data['summary'],
+                            year=data['year'],
+                            ager=ager,
+                            status=Status.objects.get(id=choice([1, 2, 3])),
+                            poster=data['poster'])
+    for actor in data['actors']:
         try:
-            country = Country.objects.get(name=data['country'])
+            act = Actor.objects.get(fname=actor['fname'], lname=actor['lname'])
         except:
-            country = Country.objects.create(name=data['country'])
-        try:
-            director = Director.objects.get(**data['director'])
-        except:
-            director = Director.objects.create(**data['director'])
-        try:
-            ager = AgeRate.objects.get(rate=data['ager'])
-        except:
-            ager = AgeRate.objects.create(rate=data['ager'])
-        try:
-            genre = Genre.objects.get(name=data['genre'])
-        except:
-            genre = Genre.objects.create(name=data['genre'])
-        kino = Kino.objects.create(title=data['title'],
-                                genre=genre,
-                                rating=data['rating'],
-                                country=country,
-                                director=director,
-                                summary=data['summary'],
-                                year=data['year'],
-                                ager=ager,
-                                status=Status.objects.get(id=choice([1, 2, 3])),
-                                poster=data['poster'])
-        for actor in data['actors']:
-            try:
-                act = Actor.objects.get(fname=actor['fname'], lname=actor['lname'])
-            except:
-                act = Actor.objects.create(**actor)
-            kino.actor.add(act)
-            kino.save()
+            act = Actor.objects.create(**actor)
+        kino.actor.add(act)
+        kino.save()
 
 
 def isindb(title, year):
