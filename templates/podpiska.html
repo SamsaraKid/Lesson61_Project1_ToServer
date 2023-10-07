@@ -19,12 +19,12 @@
                         <img src="{{ kino.poster }}">
                         <div>{{ kino }}</div>
                     </a>
-                    <div>({{ kino.genre }})</div>
-                    {% if not user.username %}
-                        <a href="{% url 'prosmotr' kino.id one.id 0 %}"><button>Смотреть</button></a>
-                    {% else %}
-                        <a href="{% url 'prosmotr' kino.id one.id user.id %}"><button>Смотреть</button></a>
-                    {% endif %}
+{#                    <div>({{ kino.genre }})</div>#}
+{#                    {% if not user.username %}#}
+{#                        <a href="{% url 'prosmotr' kino.id one.id 0 %}"><button>Смотреть</button></a>#}
+{#                    {% else %}#}
+{#                        <a href="{% url 'prosmotr' kino.id one.id user.id %}"><button>Смотреть</button></a>#}
+{#                    {% endif %}#}
                 </div>
         {% endfor %}
         </div>
