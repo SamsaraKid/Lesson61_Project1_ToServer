@@ -91,7 +91,7 @@ def getmovies():
 
                     #переход на страницу фильма
                     movie_title.click()
-                    time.sleep(1)
+                    time.sleep(0.5)
                     summary = driver.find_element(By.CLASS_NAME, 'styles_synopsisSection__nJoAj').text
                     ager_all = driver.find_elements(By.CLASS_NAME, 'styles_rootHighContrast__Bevle')
                     if len(ager_all) > 1:
@@ -107,7 +107,7 @@ def getmovies():
                     while True:
                         actor_li = driver.find_elements(By.CLASS_NAME, 'styles_list___ufg4')[0].find_elements(By.TAG_NAME,'li')
                         actor_li[i].find_element(By.TAG_NAME, 'a').click()
-                        time.sleep(1)
+                        time.sleep(0.5)
                         name = driver.find_element(By.CLASS_NAME, 'styles_primaryName__2Zu1T').text
                         try:
                             actor_fname = name[0:name.index(' ')]
@@ -138,7 +138,7 @@ def getmovies():
                         print('Актёр: ', actor)
                         actors.append(actor)
                         driver.back()
-                        time.sleep(1)
+                        time.sleep(0.5)
                         i += 1
                         if i >= len(actor_li):
                             break
