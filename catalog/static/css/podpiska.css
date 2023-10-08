@@ -11,13 +11,17 @@
 
 .kino_card{
     text-align: center;
-    border: 2px solid black;
-    width: 5em;
-    /*padding: 10px;*/
-    font-size: xx-small;
+    border: 3px solid rgb(0, 0, 0, 0);
+    border-radius: 15px;
+    width: 10em;
+    aspect-ratio: 1 / 1.5;
+    margin: 3px;
+    font-size: small;
     word-break: break-all;
+    overflow: hidden;
 }
 
-.kino_card img{
-    width: 100%;
+.kino_card:hover{
+    border: orange 3px solid;
+    /*border-radius: 15px;*/
 }
