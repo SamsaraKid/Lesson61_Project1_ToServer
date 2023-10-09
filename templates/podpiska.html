@@ -14,18 +14,27 @@
         <h3 class="title">{{ one.name }}</h3>
         <div class="kino_cards">
         {% for kino in one.kino_set.all %}
+            <div class="flex-col">
                 <a href="{{ kino.get_absolute_url }}" class="card-a">
                     <div class="kino_card" style="
-                        background-image: url({{ kino.poster }});
-                        background-size: 100%;
+                            background-image: url({{ kino.poster }});
+                            background-size: 100%;
                             background-repeat: no-repeat">
-{#                    {% if not user.username %}#}
-{#                        <a href="{% url 'prosmotr' kino.id one.id 0 %}"><button>Смотреть</button></a>#}
-{#                    {% else %}#}
-{#                        <a href="{% url 'prosmotr' kino.id one.id user.id %}"><button>Смотреть</button></a>#}
-{#                    {% endif %}#}
                     </div>
                 </a>
+                <div class="center-text">
+                    {% if not user.username %}
+                        <a href="{% url 'prosmotr' kino.id one.id 0 %}">
+                            <button>Смотреть</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'prosmotr' kino.id one.id user.id %}">
+                            <button>Смотреть</button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
         {% endfor %}
         </div>
     {% endfor %}

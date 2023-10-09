@@ -32,4 +32,5 @@ urlpatterns = [
     path('director/<slug:pk>/<str:lname>', views.DirectorDetail.as_view(), name='infodirector'),
     path('status/', views.status, name='status'),
     path('status/prosmotr/<int:id1><int:id2><int:id3>/', views.prosmotr, name='prosmotr'),
+    path('status/buy/<int:type>', views.buy, name='buystatus'),
 ]

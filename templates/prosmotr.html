@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+        <title>Все фильмы</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'css/prosmotr.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <h2>Фильм "{{ kino }}"</h2>
+            {% if prava %}
+                <div class="screen" style="background-image: url('{% static "/img/VS5i.gif" %}');
+                        background-size: 100%;"><h1>Приятного просмотра</h1></div>
+            {% else %}
+                <div class="screen" style="background-image: url('{% static "/img/884252.gif" %}');
+                        background-size: 100%;"><h1>Купить подписку</h1></div>
+            {% endif %}
+    <h3>Ваша подписка: {{ status }}</h3>
+    <h3>Фильм входит в подписку: {{ statuskino }}</h3>
+
+    {% if not prava %}
+        {% if user.username %}
+            <h4>
+                <a href="{% url 'buystatus' type=2 %}">Купить базовую подписку</a>
+            </h4>
+            <h4>
+                <a href="{% url 'buystatus' type=3 %}">Купить супер подписку</a>
+            </h4>
+        {% else %}
+            <h4>
+                <a href="{% url 'login' %}">Купить базовую подписку</a>
+            </h4>
+            <h4>
+                <a href="{% url 'login' %}">Купить супер подписку</a>
+            </h4>
+        {% endif %}
+    {% endif %}
+
+{% endblock content %}

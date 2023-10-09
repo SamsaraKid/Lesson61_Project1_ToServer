@@ -14,7 +14,7 @@ body{
 .menu a{
     text-decoration: none;
     color: orange;
-    font-size: 1.5em;
+    font-size: 1em;
     padding: 0.5em 1em;
 }
 
@@ -59,6 +59,11 @@ ul{
 .flex-row{
     display: flex;
     flex-direction: row;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
 }
 
 .center-text{
