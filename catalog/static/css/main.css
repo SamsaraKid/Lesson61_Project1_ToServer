@@ -47,13 +47,25 @@ p{
 }
 
 .center-div img{
-    width: 20em;
+    width: 23em;
+    margin-right: 20px;
+    display: block;
 }
 
-.center-div ul{
+ul{
     padding-left: 0;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }
 
 .center-text{
     text-align: center;
+}
+
+.center-list{
+    width: max-content;
+    margin: auto;
 }

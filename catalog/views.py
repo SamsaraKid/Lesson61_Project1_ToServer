@@ -35,7 +35,7 @@ def index(req):
 
 class Kinolist(generic.ListView):
     model = Kino
-    paginate_by = 50
+    paginate_by = 30
 
 # from django.http import HttpResponse
 # def info(req, id):
@@ -48,7 +48,7 @@ class KinoDetail(generic.DetailView):
 
 class Actorlist(generic.ListView):
     model = Actor
-    paginate_by = 50
+    paginate_by = 30
 
 
 class ActorDetail(generic.DetailView):
@@ -57,7 +57,7 @@ class ActorDetail(generic.DetailView):
 
 class Directorlist(generic.ListView):
     model = Director
-    paginate_by = 50
+    paginate_by = 30
 
 
 class DirectorDetail(generic.DetailView):

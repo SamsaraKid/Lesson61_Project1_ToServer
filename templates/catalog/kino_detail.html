@@ -5,18 +5,26 @@
 {% block content %}
     <div class="center-div">
         <h2>{{ kino.title }}</h2>
-        <img src="{{ kino.poster }}">
-        <h3>Год: {{ kino.year }}</h3>
-        <h3>Жанр: {{ kino.genre }}</h3>
-        <h3>Описание: {{ kino.summary }}</h3>
-        <h3>Режиссёр: <a href="{{ kino.director.get_absolute_url }}" class="inline-a">{{ kino.director }}</a></h3>
-        <h3>Рейтинг: {{ kino.ager }}</h3>
-        <h3>Подписка: {{ kino.status }}</h3>
-        <h3>Актёры:</h3>
-        <ul>
-            {% for actor in kino.actor.all %}
-                <li><a href="{{ actor.get_absolute_url }}" class="inline-a">{{ actor.fname }} {{ actor.lname }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="flex-row">
+            <div><img src="{{ kino.poster }}"></div>
+            <div>
+                <h3>Год: {{ kino.year }}</h3>
+                <h3>Жанр: {{ kino.genre }}</h3>
+                <h3>Рейтинг: {{ kino.rating }}</h3>
+                <h3>Режиссёр: <a href="{{ kino.director.get_absolute_url }}" class="inline-a">{{ kino.director }}</a>
+                </h3>
+                <h3>Возрастной рейтинг: {{ kino.ager }}</h3>
+                <h3>Подписка: {{ kino.status }}</h3>
+                <h3>Актёры:</h3>
+                <ul>
+                    {% for actor in kino.actor.all %}
+                        <li><a href="{{ actor.get_absolute_url }}"
+                               class="inline-a">{{ actor.fname }} {{ actor.lname }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div><h3>Описание: </h3><h3>{{ kino.summary }}</h3></div>
     </div>
 {% endblock content %}
