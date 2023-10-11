@@ -54,6 +54,8 @@ p{
 
 ul{
     padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .flex-row{
@@ -73,4 +75,16 @@ ul{
 .center-list{
     width: max-content;
     margin: auto;
+}
+
+.errorlist{
+    color: red;
+}
+
+.errors input{
+    background-color: red;
+}
+
+.errors label{
+    color: sandybrown;
 }

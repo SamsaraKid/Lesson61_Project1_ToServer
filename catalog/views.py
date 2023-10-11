@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.models import User, Group
 from django.views import generic
+from .form import SignUp
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 import datetime
 from .seleniumkp import getmovies
 
@@ -9,24 +12,21 @@ def index(req):
     numkino = Kino.objects.all().count()
     numactor = Actor.objects.all().count()
     numfree = Kino.objects.filter(status_id=1).count()
-    usid = req.user.id  # находим номер текущего пользователя
-    user = User.objects.get(id=usid)  # находим его номер в таблице user
-    statusnow = user.groups.all()[0]  # находим номер его подписки (группы)
     # username = req.user.first_name if hasattr(req.user, 'first_name') else 'Guest'
     try:
         username = req.user.first_name
+        usid = req.user.id  # находим номер текущего пользователя
+        user = User.objects.get(id=usid)  # находим его номер в таблице user
+        statusnow = user.groups.all()[0]  # находим номер его подписки (группы)
     except:
         username = 'Guest'
+        statusnow = Group.objects.get(id=1).name
+        print(statusnow)
     data = {'k1': numkino, 'k2': numactor, 'k3': numfree, 'username': username, 'k4': statusnow}
     # user = User.objects.create_user('user2', 'user2@mail.ru', 'useruser')
     # user.first_name = 'Vlad'
     # user.last_name = 'Petrov'
     # user.save()
-    # try:
-    #     a = Actor.objects.get(fname='Гоша', lname='Куценко').id
-    #     print(a)
-    # except:
-    #     print(False)
     # getmovies()
 
     return render(req, 'index.html', context=data)
@@ -108,3 +108,29 @@ def buy(req, type):
     k1 = groupnew.name  # узанём название подписки для вывода
     data = {'podpiska': k1}
     return render(req, 'buy.html', context=data)
+
+
+def registr(req):
+    if req.POST:
+        anketa = SignUp(req.POST)
+        if anketa.is_valid():
+            anketa.save()
+            name = anketa.cleaned_data.get('username')
+            password = anketa.cleaned_data.get('password1')
+            fname = anketa.cleaned_data.get('first_name')
+            lname = anketa.cleaned_data.get('last_name')
+            email = anketa.cleaned_data.get('email')
+            user = authenticate(username=name, password=password)
+            man = User.objects.get(username=name)
+            man.first_name = fname
+            man.last_name = lname
+            man.email = email
+            man.save()
+            login(req, user)
+            group = Group.objects.get(id=1)
+            group.user_set.add(man)
+            return redirect('home')
+    else:
+        anketa = SignUp()
+    data = {'regform': anketa}
+    return render(req, 'registration/registration.html', context=data)
