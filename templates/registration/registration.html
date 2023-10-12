@@ -1,19 +1,20 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h2>Регистрация</h2>
-    <form action="" method="post">
-        {% csrf_token %}
-{#        <table>{{ regform }}</table>#}
-    <table>
-        {% for i in regform %}
-                <tr>
-                    <td>{{ i.label_tag }}</td>
-                    <td>{{ i }}</td>
-                    <td>{{ i.errors }}</td>
-                </tr>
-        {% endfor %}
-    </table>
-    <input type="submit" value="Отправить">
-    </form>
+    <div class="center-div center-text">
+        <h2>Регистрация</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                {% for i in regform %}
+                    <tr>
+                        <th>{{ i.label_tag }}</th>
+                        <td>{{ i }}</td>
+                        <td>{{ i.errors }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
 {% endblock content %}

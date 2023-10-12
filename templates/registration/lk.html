@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="center-div center-text">
+        <h1>Личный кабинет</h1>
+        <h2>Привет {{ username }}</h2>
+        <h2>Уровень вашей подписки: {{ statusnow }}</h2>
+        {% if statusnow == 'Free' or statusnow == 'Super' %}
+            <h4><a href="{% url 'changestatus' type=2 %}">Перейти на подписку Based</a></h4>
+        {% endif %}
+        {% if statusnow == 'Free' or statusnow == 'Based' %}
+            <h4><a href="{% url 'changestatus' type=3 %}">Перейти на подписку Super</a></h4>
+        {% endif %}
+        {% if statusnow == 'Based' or statusnow == 'Super' %}
+            <h4><a href="{% url 'changestatus' type=1 %}">Отказаться от подписки</a></h4>
+        {% endif %}
+
+    </div>
+{% endblock content %}

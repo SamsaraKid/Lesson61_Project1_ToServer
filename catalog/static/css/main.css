@@ -52,6 +52,10 @@ p{
     display: block;
 }
 
+.center-div table{
+    margin: auto;
+}
+
 ul{
     padding-left: 0;
     margin-top: 0;

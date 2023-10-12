@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Вход</h2>
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
-        <input type="submit" value="вход">
-    </form>
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+        <title>Оформление подписки</title>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock head %}
 
-    <h2>
-        <a href="{% url 'registr' %}">Регистрация</a>
-    </h2>
+{% block content %}
+    <div class="center-div center-text">
+        <h2>Вход</h2>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>{{ form.username.label_tag }}</th>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <th>{{ form.password.label_tag }}</th>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="Вход">
+        </form>
 
-</body>
-</html>
+        <h2>
+            <a href="{% url 'registr' %}">Регистрация</a>
+        </h2></div>
+{% endblock content %}

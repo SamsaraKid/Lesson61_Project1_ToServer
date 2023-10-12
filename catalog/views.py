@@ -13,27 +13,13 @@ def index(req):
     numactor = Actor.objects.all().count()
     numfree = Kino.objects.filter(status_id=1).count()
     # username = req.user.first_name if hasattr(req.user, 'first_name') else 'Guest'
-    try:
-        username = req.user.first_name
-        usid = req.user.id  # находим номер текущего пользователя
-        user = User.objects.get(id=usid)  # находим его номер в таблице user
-        statusnow = user.groups.all()[0]  # находим номер его подписки (группы)
-    except:
-        username = 'Guest'
-        statusnow = Group.objects.get(id=1).name
-        print(statusnow)
-    data = {'k1': numkino, 'k2': numactor, 'k3': numfree, 'username': username, 'k4': statusnow}
+    data = {'k1': numkino, 'k2': numactor, 'k3': numfree}
     # user = User.objects.create_user('user2', 'user2@mail.ru', 'useruser')
     # user.first_name = 'Vlad'
     # user.last_name = 'Petrov'
     # user.save()
     # getmovies()
-
     return render(req, 'index.html', context=data)
-
-
-# def allkino(req):
-#     return render(req, 'index.html')
 
 
 class Kinolist(generic.ListView):
@@ -75,9 +61,6 @@ def status(req):
 
 def prosmotr(req, id1, id2, id3):
     print(id1, id2, id3)
-    mas = ['бесплатно', 'базовая', 'супер']  # kino id2
-    mas2 = ['Free', 'Based', 'Super']  # user id3
-    status = 0
     if id3 != 0:
         status = User.objects.get(id=id3)  # нашли юзера
         status = status.groups.all()  # нашли его подписки
@@ -97,7 +80,7 @@ def prosmotr(req, id1, id2, id3):
     return render(req, 'prosmotr.html', context=data)
 
 
-def buy(req, type):
+def changestatus(req, type):
     usid = req.user.id  # находим номер текущего пользователя
     user = User.objects.get(id=usid)  # находим его номер в таблице user
     statusnow = user.groups.all()[0].id  # находим номер его подписки (группы)
@@ -106,8 +89,8 @@ def buy(req, type):
     groupnew = Group.objects.get(id=type)  # находим новую подписку в таблице group
     groupnew.user_set.add(user)  # добавляем новую подписку
     k1 = groupnew.name  # узанём название подписки для вывода
-    data = {'podpiska': k1}
-    return render(req, 'buy.html', context=data)
+    data = userstatus(req)
+    return render(req, 'registration/lk.html', context=data)
 
 
 def registr(req):
@@ -134,3 +117,21 @@ def registr(req):
         anketa = SignUp()
     data = {'regform': anketa}
     return render(req, 'registration/registration.html', context=data)
+
+
+def lk(req):
+    data = userstatus(req)
+    return render(req, 'registration/lk.html', context=data)
+
+
+def userstatus(req):
+    try:
+        username = req.user.first_name
+        usid = req.user.id  # находим номер текущего пользователя
+        user = User.objects.get(id=usid)  # находим его номер в таблице user
+        statusnow = str(user.groups.all()[0])  # находим номер его подписки (группы)
+    except:
+        username = 'Guest'
+        statusnow = Group.objects.get(id=1).name
+    data = {'username': username, 'statusnow': statusnow}
+    return data

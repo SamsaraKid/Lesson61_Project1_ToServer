@@ -7,33 +7,33 @@
 {% endblock head %}
 
 {% block content %}
-    <h2>Фильм "{{ kino }}"</h2>
-            {% if prava %}
-                <div class="screen" style="background-image: url('{% static "/img/VS5i.gif" %}');
-                        background-size: 100%;"><h1>Приятного просмотра</h1></div>
-            {% else %}
-                <div class="screen" style="background-image: url('{% static "/img/884252.gif" %}');
-                        background-size: 100%;"><h1>Купить подписку</h1></div>
-            {% endif %}
-    <h3>Ваша подписка: {{ status }}</h3>
-    <h3>Фильм входит в подписку: {{ statuskino }}</h3>
-
-    {% if not prava %}
-        {% if user.username %}
-            <h4>
-                <a href="{% url 'buystatus' type=2 %}">Купить базовую подписку</a>
-            </h4>
-            <h4>
-                <a href="{% url 'buystatus' type=3 %}">Купить супер подписку</a>
-            </h4>
+    <div class="center-div center-text">
+        <h2>Фильм "{{ kino }}"</h2>
+        {% if prava %}
+            <div class="screen" style="background-image: url('{% static "/img/VS5i.gif" %}');
+                    background-size: 100%;"><h1>Приятного просмотра</h1></div>
         {% else %}
-            <h4>
-                <a href="{% url 'login' %}">Купить базовую подписку</a>
-            </h4>
-            <h4>
-                <a href="{% url 'login' %}">Купить супер подписку</a>
-            </h4>
+            <div class="screen" style="background-image: url('{% static "/img/884252.gif" %}');
+                    background-size: 100%;"><h1>Купить подписку</h1></div>
         {% endif %}
-    {% endif %}
+        <h3>Ваша подписка: {{ status }}</h3>
+        <h3>Фильм входит в подписку: {{ statuskino }}</h3>
+
+        {% if not prava %}
+            {% if user.username %}
+                {% if statuskino == 'Based' %}
+                    <h4><a href="{% url 'changestatus' type=2 %}">Перейти на подписку Based</a></h4>
+                {% endif %}
+                {% if statuskino == 'Super' %}
+                    <h4><a href="{% url 'changestatus' type=3 %}">Перейти на подписку Super</a></h4>
+                {% endif %}
+            {% else %}
+                <h4>Для оформления подписки</h4>
+                <h4><a href="{% url 'login' %}">Залогиньтесь</a></h4>
+                <h4>или</h4>
+                <h4><a href="{% url 'registr' %}">Зарегистрируйтесь</a></h4>
+            {% endif %}
+        {% endif %}
+    </div>
 
 {% endblock content %}
