@@ -89,8 +89,7 @@ def changestatus(req, type):
     groupnew = Group.objects.get(id=type)  # находим новую подписку в таблице group
     groupnew.user_set.add(user)  # добавляем новую подписку
     k1 = groupnew.name  # узанём название подписки для вывода
-    data = userstatus(req)
-    return render(req, 'registration/lk.html', context=data)
+    return redirect('lk')
 
 
 def registr(req):
@@ -120,11 +119,6 @@ def registr(req):
 
 
 def lk(req):
-    data = userstatus(req)
-    return render(req, 'registration/lk.html', context=data)
-
-
-def userstatus(req):
     try:
         username = req.user.first_name
         usid = req.user.id  # находим номер текущего пользователя
@@ -134,4 +128,4 @@ def userstatus(req):
         username = 'Guest'
         statusnow = Group.objects.get(id=1).name
     data = {'username': username, 'statusnow': statusnow}
-    return data
+    return render(req, 'registration/lk.html', context=data)
