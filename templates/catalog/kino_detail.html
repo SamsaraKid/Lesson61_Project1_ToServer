@@ -26,5 +26,35 @@
             </div>
         </div>
         <div><h3>Описание: </h3><h3>{{ kino.summary }}</h3></div>
+        <h3>Комментарии: </h3>
+        {% if kino.comment_set.all %}
+            {% for c in kino.comment_set.all %}
+                <table class="comment">
+                    <tr>
+                        <td class="bold">{{ c.author.first_name }} {{ c.author.last_name }}</td>
+                        <td>{{ c.date }}</td></tr>
+                    <tr>
+                        <td colspan="2">{{ c.text }}</td></tr>
+                </table>
+            {% endfor %}
+            {% else %}
+            <h4>Комментариев пока нет</h4>
+        {% endif %}
+        {% if user.username %}
+        <form method="POST">
+            {% csrf_token %}
+            <div>{{ form.text.label }}</div>
+            <div>{{ form.text }}</div>
+            <div>{{ form.author }}</div>
+            <div>{{ form.movie }}</div>
+            <input type="submit" value="Отправить">
+        </form>
+        {% else %}
+            <h4>Чтобы оставить комментарий
+                <a href="{% url 'login' %}">залогиньтесь</a>
+                или
+                <a href="{% url 'registr' %}">зарегистрируйтесь</a>
+            </h4>
+        {% endif %}
     </div>
 {% endblock content %}

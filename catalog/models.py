@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -81,5 +82,12 @@ class Kino(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('info', args=[self.id, self.title])
+        return reverse('info', args=[self.id])  #, self.title
         # return f'kino/{self.id}/{self.title}'
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Автор')
+    text = models.TextField(max_length=500, verbose_name='Текст комментария')
+    date = models.DateTimeField(auto_now_add=True, blank=True, null=True, verbose_name='Дата комментария')
+    movie = models.ForeignKey(Kino, on_delete=models.CASCADE, verbose_name='Фильм')

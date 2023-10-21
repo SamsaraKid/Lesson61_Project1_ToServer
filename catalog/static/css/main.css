@@ -53,7 +53,7 @@ p{
 }
 
 .center-div table{
-    margin: auto;
+    margin-inline: auto;
 }
 
 ul{
@@ -91,4 +91,23 @@ ul{
 
 .errors label{
     color: sandybrown;
+}
+
+.comment{
+    width: 100%;
+    margin: 1em 0; !important;
+    border-top: black 2px solid;
+    border-bottom: black 2px solid;
+}
+
+.comment td{
+    width: 50%;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+textarea{
+    width: 100%;
 }

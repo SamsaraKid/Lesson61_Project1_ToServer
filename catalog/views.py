@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.models import User, Group
 from django.views import generic
-from .form import SignUp
+from .form import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 import datetime
 from .seleniumkp import getmovies
+
 
 def index(req):
     numkino = Kino.objects.all().count()
@@ -31,8 +32,29 @@ class Kinolist(generic.ListView):
 #     film = Kino.objects.get(id=id)
 #     return HttpResponse(film.title)
 
-class KinoDetail(generic.DetailView):
+class KinoDetail(generic.edit.FormMixin, generic.DetailView):
     model = Kino
+    form_class = CommentForm
+
+    def get_success_url(self):
+        return reverse('info', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(KinoDetail, self).get_context_data(**kwargs)
+        context['form'] = CommentForm(initial={'movie': self.object.id, 'author': self.request.user.id})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super(KinoDetail, self).form_valid(form)
 
 
 class Actorlist(generic.ListView):
